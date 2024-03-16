@@ -1,0 +1,136 @@
+html {
+    --slider-trans-x: 0px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+body > h2, body > p {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+body > h2 {
+    margin-bottom: .5rem;
+}
+
+.wpui-icon {
+    width: 1rem;
+    height: 100%;
+}
+
+.wpui-tags-slider-container {
+    display: flex;
+    position: relative;
+    width: fit-content;
+    max-width: 75%;
+    margin: auto;
+    justify-content: center;
+}
+
+.wpui-outer {
+    width: 100%;
+    max-width: 800px;
+    overflow-x: hidden;
+}
+
+.wpui-tags-track {
+    width: max-content;
+    transform: translateX(var(--slider-trans-x));
+    transition: transform 0.3s ease-out;
+}
+
+.wpui-tags-track a.wpui-tag {
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(36, 36, 36);
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgb(187, 187, 187);
+    margin-right: 1rem;
+    transition: all .3s ease;
+}
+
+.wpui-tags-track a.wpui-tag.active {
+    background-color: #009688;
+    color: rgb(247, 247, 247);
+    border-color: #009688;
+}
+
+.wpui-tags-track a.wpui-tag:not(.active):hover {
+    background-color: rgb(211, 227, 240);
+}
+
+:is(.btn-prev, .btn-next) {
+    position: absolute;
+    z-index: 10;
+    border: 1px solid lightgray;
+    outline: none;
+    height: 100%;
+    padding: 6px 10px;
+    border-radius: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+:is(.btn-prev, .btn-next):hover {
+    background-color: rgb(221, 221, 221);
+}
+
+:is(.btn-prev, .btn-next):active {
+    background-color: rgb(196, 196, 196);
+}
+
+button.btn-prev {
+    left: -20px;
+}
+
+button.btn-next {
+    right: -20px;
+}
+
+:is(.wpui-left-overlay, .wpui-right-overlay) {
+    position: absolute;
+    z-index: 3;
+    height: 100%;
+    width: 100px;
+    top: 0;
+}
+
+.wpui-left-overlay {
+    background: linear-gradient(to right, white, rgb(255, 255, 255, 0));
+    left: 0;
+}
+
+.wpui-right-overlay {
+    background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+    right: 0;
+}
+
+.wpui-hide {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .wpui-tags-track a.wpui-tag {
+        font-size: 0.8rem;
+        padding: 6px;
+        margin-right: 0.5rem;
+    }
+
+    :is(.btn-prev, .btn-next) {
+        padding: 4px 8px;
+    }
+
+    :is(.wpui-left-overlay, .wpui-right-overlay) {
+        width: 50px;
+    }
+}
