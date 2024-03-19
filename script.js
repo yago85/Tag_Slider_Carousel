@@ -67,6 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
             updateActionButtonsVisibility();
         }
 
+        function updateSliderOnResize() {
+            updateSliderPosition(currentTransX);
+        }
+
+        window.addEventListener('resize', updateSliderOnResize);
+
         function smoothlyMoveSlider() {
             // Smoothly move the slider to the target position
             if (animFrame) cancelAnimationFrame(animFrame);
