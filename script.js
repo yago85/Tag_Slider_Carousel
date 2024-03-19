@@ -76,14 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
         function smoothlyMoveSlider() {
             // Smoothly move the slider to the target position
             if (animFrame) cancelAnimationFrame(animFrame);
-            const duration = 1000; // Время, за которое происходит перемещение (в миллисекундах)
+            const duration = 1000;
             const startTime = performance.now();
             const startPosition = currentTransX;
 
             function animate(currentTime) {
                 const elapsedTime = currentTime - startTime;
-                const progress = Math.min(elapsedTime / duration, 1); // Прогресс анимации (от 0 до 1)
-                const easedProgress = 1 - Math.pow(1 - progress, 3); // Используйте для плавного замедления
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
                 const nextPosition = startPosition + (targetTransX - startPosition) * easedProgress;
                 updateSliderPosition(nextPosition);
 
