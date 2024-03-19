@@ -76,14 +76,22 @@ document.addEventListener("DOMContentLoaded", () => {
         function smoothlyMoveSlider() {
             // Smoothly move the slider to the target position
             if (animFrame) cancelAnimationFrame(animFrame);
-            animFrame = requestAnimationFrame(() => {
-                const step = (targetTransX - currentTransX) / 20;
-                if (Math.abs(step) > 1) {
-                    currentTransX += step;
-                    updateSliderPosition(currentTransX);
-                    smoothlyMoveSlider();
-                } else updateSliderPosition(targetTransX);
-            });
+            const duration = 1000; // Время, за которое происходит перемещение (в миллисекундах)
+            const startTime = performance.now();
+            const startPosition = currentTransX;
+
+            function animate(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1); // Прогресс анимации (от 0 до 1)
+                const easedProgress = 1 - Math.pow(1 - progress, 3); // Используйте для плавного замедления
+                const nextPosition = startPosition + (targetTransX - startPosition) * easedProgress;
+                updateSliderPosition(nextPosition);
+
+                if (progress < 1) {
+                    animFrame = requestAnimationFrame(animate);
+                }
+            }
+            animFrame = requestAnimationFrame(animate);
         }
 
         function moveSlider(direction, isWheel = false) {
